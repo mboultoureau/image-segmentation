@@ -1,0 +1,80 @@
+svg.a9s-annotationlayer .a9s-annotation .a9s-inner {
+    fill: #ffffff22;
+}
+
+.a9s-annotation.selected .a9s-inner,
+.a9s-selection .a9s-inner,
+.a9s-annotation.editable .a9s-inner {
+    stroke: #fff;
+}
+
+.a9s-annotation.editable .a9s-inner:hover {
+    fill: #ffffff11;
+}
+
+svg.a9s-annotationlayer .a9s-handle .a9s-handle-inner {
+    fill: #ffffff;
+    stroke: #fff;
+}
+
+#overlay {
+    position: absolute !important;
+}
+
+#overlay>div:not([data-radix-popper-content-wrapper]):nth-last-of-type(1) {
+    display: none;
+}
+
+/* .r6n-editor {
+    border-radius: var(0.5em);
+}
+
+.r6o-btn {
+    background-color: hsl(var(--primary));
+    border: none;
+    border-radius: calc(var(--radius) - 2px);
+    color: hsl(var(--primary-foreground));
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    white-space: nowrap;
+}
+
+.r6o-btn:hover {
+    background-color: hsl(var(--primary) / 0.9);
+}
+
+.r6o-btn.outline {
+    background-color: hsl(var(--background));
+    border-color: hsl(var(--input));
+    color: hsl(var(--primary));
+} */
+
+.a9s-annotation foreignObject {
+    overflow: visible;
+    width: 1px;
+    height: 1px;
+}
+
+.a9s-annotation foreignObject label {
+    display: inline-block;
+    padding: 3px 8px;
+}
+
+.a9s-annotation label {
+    transform:translateY(-100%) translateX(-1px);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #fff;   
+
+    border-width:2px 2px 0 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
