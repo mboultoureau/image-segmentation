@@ -320,12 +320,16 @@ export default function ImageSegmentation({ image, annotations }: Props) {
 
     const onNextTask = () => {
         const annotations = annotate.getAnnotations();
+        const result = {
+            "image": image,
+            "data": annotations
+        }
 
         toast({
             title: "You submitted the following values:",
             description: (
                 <pre className="mt-2 w-[340px] max-h-[500px] rounded-md bg-slate-950 p-4 overflow-scroll select-text">
-                    <code className="text-white">{JSON.stringify(annotations, null, 2)}</code>
+                    <code className="text-white">{JSON.stringify(result, null, 2)}</code>
                 </pre>
             ),
         });
