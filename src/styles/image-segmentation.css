@@ -25,38 +25,6 @@ svg.a9s-annotationlayer .a9s-handle .a9s-handle-inner {
     display: none;
 }
 
-/* .r6n-editor {
-    border-radius: var(0.5em);
-}
-
-.r6o-btn {
-    background-color: hsl(var(--primary));
-    border: none;
-    border-radius: calc(var(--radius) - 2px);
-    color: hsl(var(--primary-foreground));
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-    white-space: nowrap;
-}
-
-.r6o-btn:hover {
-    background-color: hsl(var(--primary) / 0.9);
-}
-
-.r6o-btn.outline {
-    background-color: hsl(var(--background));
-    border-color: hsl(var(--input));
-    color: hsl(var(--primary));
-} */
-
 .a9s-annotation foreignObject {
     overflow: visible;
     width: 1px;
@@ -77,4 +45,10 @@ svg.a9s-annotationlayer .a9s-handle .a9s-handle-inner {
     border-width:2px 2px 0 2px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    width: 150px;
+    max-width: max-content;
+}
+
+.a9s-annotation polygon + .a9s-formatter-el label {
+    border-radius: 6px;
 }

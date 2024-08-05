@@ -5,15 +5,15 @@
             "type": "Annotation",
             "body": [
                 {
-                    "key": "category",
-                    "value": "fan_like_plate"
+                    "id": "category",
+                    "value": "fan_like_hexagon"
                 },
                 {
-                    "key": "quality",
+                    "id": "quality",
                     "value": 3
                 },
                 {
-                    "key": "confidence",
+                    "id": "confidence",
                     "value": 1
                 }
             ],
@@ -31,15 +31,15 @@
             "type": "Annotation",
             "body": [
                 {
-                    "key": "category",
-                    "value": "multiple_irregulars_1"
+                    "id": "category",
+                    "value": "multiple_deficient_hexagonals_with_branches"
                 },
                 {
-                    "key": "quality",
+                    "id": "quality",
                     "value": 1
                 },
                 {
-                    "key": "confidence",
+                    "id": "confidence",
                     "value": 0
                 }
             ],

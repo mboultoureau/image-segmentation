@@ -1,5 +1,6 @@
 'use client'
 
+import { settings } from '../../lib/settings';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
 // @ts-ignore
@@ -9,133 +10,10 @@ import * as Annotorious from '@recogito/annotorious-openseadragon';
 import '@recogito/annotorious-openseadragon/dist/annotorious.min.css';
 import OpenSeadragon from 'openseadragon';
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
-import './image-segmentation.css';
+import '../../styles/image-segmentation.css';
 import Overlay from './overlay';
-
-
-const colors = [
-    {
-        value: "single",
-        label: "Single",
-        outerColor: "#1abc9c",
-        innerColor: "#1abc9c22"
-    },
-    {
-        label: "Microparticule",
-        value: "microparticule",
-        image: "/annotations/microparticule.png",
-        outerColor: "#3498db",
-        innerColor: "#3498db22"
-    },
-    {
-        label: "Simple plate",
-        value: "simple_plate",
-        image: "/annotations/simple_plate.png",
-        outerColor: "#9b59b6",
-        innerColor: "#9b59b622"
-    },
-    {
-        label: "Fan-like plate",
-        value: "fan_like_plate",
-        image: "/annotations/fan_like_plate.png",
-        outerColor: "#34495e",
-        innerColor: "#34495e22"
-    },
-    {
-        label: "Dentrite plate",
-        value: "dentrite_plate",
-        image: "/annotations/dentrite_plate.png",
-        outerColor: "#f1c40f",
-        innerColor: "#f1c40f22"
-    },
-    {
-        label: "Fern-like dentrite plate",
-        value: "fern_like_dentrite_plate",
-        image: "/annotations/fern_like_dentrite_plate.png",
-        outerColor: "#e67e22",
-        innerColor: "#e67e2222"
-    },
-    {
-        label: "Column/Square",
-        value: "column_square",
-        image: "/annotations/column_square.png",
-        outerColor: "#e74c3c",
-        innerColor: "#e74c3c22"
-    },
-    {
-        label: "Singular Irregular",
-        value: "singular_irregular",
-        image: "/annotations/singular_irregular.png",
-        outerColor: "#2ecc71",
-        innerColor: "#2ecc7122"
-    },
-    {
-        label: "Cloud-particle",
-        value: "cloud_particle",
-        image: "/annotations/cloud_particle.png",
-        outerColor: "#f39c12",
-        innerColor: "#f39c1222"
-    },
-    {
-        value: "multiple",
-        label: "Multiple",
-        outerColor: "#cd84f1",
-        innerColor: "#cd84f122"
-    },
-    {
-        label: "Combinations",
-        value: "combinations",
-        image: "/annotations/combinations.png",
-        outerColor: "#7d5fff",
-        innerColor: "#7d5fff22"
-    },
-    {
-        label: "Double plate",
-        value: "double_plate",
-        image: "/annotations/double_plate.png",
-        outerColor: "#32ff7e",
-        innerColor: "#32ff7e22"
-    },
-    {
-        label: "Multiple Columns/Squares",
-        value: "multiple_columns_squares",
-        image: "/annotations/multiple_columns_squares.png",
-        outerColor: "#17c0eb",
-        innerColor: "#17c0eb22"
-    },
-    {
-        label: "Multiple Irregulars",
-        value: "multiple_irregulars",
-        image: "/annotations/multiple_irregulars.png",
-        outerColor: "#a55eea",
-        innerColor: "#a55eea22"
-    },
-    {
-        label: "Multiple irregulars 1",
-        value: "multiple_irregulars_1",
-        outerColor: "#26de81",
-        innerColor: "#26de8122"
-    },
-    {
-        label: "Multiple irregulars 2",
-        value: "multiple_irregulars_2",
-        outerColor: "#4b7bec",
-        innerColor: "#4b7bec22"
-    },
-    {
-        label: "Multiple irregulars 3",
-        value: "multiple_irregulars_3",
-        outerColor: "#eb3b5a",
-        innerColor: "#eb3b5a22"
-    },
-    {
-        value: "undefined",
-        label: "Undefined",
-        outerColor: "#d1d8e0",
-        innerColor: "#d1d8e022"
-    }
-]
 
 type Props = {
     image: string;
@@ -150,6 +28,7 @@ export default function ImageSegmentation({ image, annotations }: Props) {
     const [selection, setSelection] = useState<any>(null);
     const [edition, setEdition] = useState(null);
     const { toast } = useToast();
+    const { t } = useTranslation();
 
     useEffect(() => {
         setSelection({
@@ -159,19 +38,20 @@ export default function ImageSegmentation({ image, annotations }: Props) {
     }, [edition])
 
     const formatter = (annotation: any) => {
-        const annotationCategory = annotation.bodies.find((b: any) => b.key === "category");
+        const annotationCategory = annotation.bodies.find((b: any) => b.id === "category");
 
         if (annotationCategory) {
-            const category = colors.find((c) => c.value === annotationCategory.value);
+            const category = settings.category.categories.find((c) => c.value === annotationCategory.value);
             if (!category) return;
 
+            const label = settings.category.isTranslatable ? t(category.label) : category.label;
             const foreignObject = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
             foreignObject.innerHTML = `
                 <label
                     xmlns="http://www.w3.org/1999/xhtml"
                     style="border-color: ${category.outerColor}; background-color: ${category.outerColor}"
                 >
-                    ${category.label}
+                    ${label}
                 </label>
             `;
 
@@ -338,8 +218,8 @@ export default function ImageSegmentation({ image, annotations }: Props) {
     return (
         <>
             <div className="mx-auto flex justify-between w-full max-w-6xl gap-2">
-                <h1 className="text-3xl font-semibold">Image segmentation</h1>
-                <Button onClick={onNextTask}>Next task</Button>
+                <h1 className="text-3xl font-semibold">{t('image_segmentation')}</h1>
+                <Button onClick={onNextTask}>{t('next_task')}</Button>
             </div>
             <div className="relative h-full w-full my-8">
                 <Overlay
