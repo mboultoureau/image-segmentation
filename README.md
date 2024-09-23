@@ -24,6 +24,12 @@ npm install
 npm start
 ```
 
+You can build the application with the following command:
+
+```bash
+npm run build
+```
+
 ## Personalisation
 
 ### Localisation
